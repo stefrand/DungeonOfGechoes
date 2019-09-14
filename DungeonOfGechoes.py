@@ -6,34 +6,15 @@ import os
 # os.system("clear")  Linux - OSX
 # os.system("cls")  Windows
 
-
-#Start game code
-
-print("*****WELCOME TO THE DUNGEON OF (G)ECHOES*****")
-print()
-
 #Lists for rooms & creatures
 roomadj = ('freezing cold','very warm','damp and wet','almost too dark to see anything')
 creatures = ('goblin','huge rat','giant spider')
 
-#Initialize while loop control variable
-userchoice = ''
-
 #Dictionary for the user's info
 userstats = {'Name': '','HP': 10,'Gold': 0, 'Weapon': ''}
 
-#Get user input for name & weapon, clean it up, update dict
-tempname = input("What is your name, adventurer?  ")
-userstats['Name'] = str(tempname).upper().strip()
-print()
-print("And what weapon are you carrying today?")
-tempweap = input("I have a :  ")
-userstats['Weapon'] = str(tempweap).lower().strip()
-
-#Update control variable, give user chance to begin game while loop or not
-print()
-userchoice = input("Are you ready to begin, " + str(userstats['Name']) + "? Yes or No:  ")
-
+#Initialize while loop control variable
+userchoice = ''
 
 #Combat function, pass in the random creature, the userstats dictionary
 def combat(fightwhat,userstats):
@@ -115,10 +96,28 @@ def createroom(userstats):
         return fightchoice
 
 
+#Start game code
+
+print("*****WELCOME TO THE DUNGEON OF (G)ECHOES*****")
+print()
+
+#Get user input for name & weapon, clean it up, update dict
+tempname = input("What is your name, adventurer?  ")
+userstats['Name'] = str(tempname).upper().strip()
+print()
+print("And what weapon are you carrying today?")
+tempweap = input("I have a :  ")
+userstats['Weapon'] = str(tempweap).lower().strip()
+
+#Update control variable, give user chance to begin game while loop or not
+print()
+userchoice = input("Are you ready to begin, " + str(userstats['Name']) + "? Yes or No:  ")
+
 #Begin main game while loop
 while userchoice.lower() != 'no':
     #Clear the console
     os.system("cls")
+    
     #create room function call, pass in userstats dict, update control value to continue or end while loop 
     userchoice = createroom(userstats)
 
