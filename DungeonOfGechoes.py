@@ -79,45 +79,46 @@ def combat(fightwhat,userstats):
             return #end of combat, return to createroom function
     return #while loop not entered if HP < 1, return to createroom function
 
+#create room fuction, pass in the userstats dictionary
+def createroom(userstats):
+    #Print user stats at top of the screen
+    print("    " + userstats['Name'] + "   |  Weapon: " + userstats['Weapon'] + "  |  HP: " + str(userstats['HP']) + "  |  Gold: " + str(userstats['Gold']))
+    #assign random room description and random creature encounters
+    room = str(roomadj[random.randint(0,3)])
+    size = str(random.randint(10,30))
+    fightwhat = str(creatures[random.randint(0,2)])
+    print("----------------------------------------------------------")
+    print()
+    print("You walk into the room. It is " + room + "..." )
+    time.sleep(1)
+    print("It looks like it is " + size + " feet to the far wall with the next door.")
+    time.sleep(1)
+    print("There is a " + fightwhat + " in the room!")
+    time.sleep(1)
+    print()
+    #Begin combat decision tree with user decision
+    fightchoice = input("Do you attack? Yes or No: " )
+    if fightchoice.lower() == 'yes': # If the user choses to fight...
+        #combat function call, pass in random creature and userstats dict
+        combat(fightwhat,userstats)
+        if userstats['HP'] >= 1: #If the user has 1 or more hit point, they may continue
+            print()
+            #Ask user if they want to continue...if yes, while loop continues
+            return input('Do you want to walk into the next room? Yes or No:  ')
+        else: #If user does not have 1 or more hit points, they are kicked out of combat function & game ends
+            print()
+            print("You are too weak to keep fighting and run away.")
+            keepgoing = 'no'
+            return keepgoing #update userchoice to end the while loop
+    else: #update userchoice to end the while loop
+        print("You decide you are done adventuring for today.")
+        return fightchoice
+
 
 #Begin main game while loop
 while userchoice.lower() != 'no':
     #Clear the console
     os.system("cls")
-    #Create room fuction, pass in the userstats dictionary
-    def createroom(userstats):
-        #Print user stats at top of the screen
-        print("    " + userstats['Name'] + "   |  Weapon: " + userstats['Weapon'] + "  |  HP: " + str(userstats['HP']) + "  |  Gold: " + str(userstats['Gold']))
-        #assign random room description and random creature encounters
-        room = str(roomadj[random.randint(0,3)])
-        size = str(random.randint(10,30))
-        fightwhat = str(creatures[random.randint(0,2)])
-        print("----------------------------------------------------------")
-        print()
-        print("You walk into the room. It is " + room + "..." )
-        time.sleep(1)
-        print("It looks like it is " + size + " feet to the far wall with the next door.")
-        time.sleep(1)
-        print("There is a " + fightwhat + " in the room!")
-        time.sleep(1)
-        print()
-        #Begin combat decision tree with user decision
-        fightchoice = input("Do you attack? Yes or No: " )
-        if fightchoice.lower() == 'yes': # If the user choses to fight...
-            #combat function call, pass in random creature and userstats dict
-            combat(fightwhat,userstats)
-            if userstats['HP'] >= 1: #If the user has 1 or more hit point, they may continue
-                print()
-                #Ask user if they want to continue...if yes, while loop continues
-                return input('Do you want to walk into the next room? Yes or No:  ')
-            else: #If user does not have 1 or more hit points, they are kicked out of combat function & game ends
-                print()
-                print("You are too weak to keep fighting and run away.")
-                keepgoing = 'no'
-                return keepgoing #update userchoice to end the while loop
-        else: #update userchoice to end the while loop
-            print("You decide you are done adventuring for today.")
-            return fightchoice
     #create room function call, pass in userstats dict, update control value to continue or end while loop 
     userchoice = createroom(userstats)
 
@@ -133,4 +134,5 @@ print('Goodbye!')
 time.sleep(5)
 
 #End game code
+
 
