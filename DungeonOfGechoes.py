@@ -32,15 +32,15 @@ print()
 userchoice = input("Are you ready to begin, " + str(userstats['Name']) + "? Yes or No:  ")
 
 
-
-#Combat function, pass in: hitpoints from dict, the random creature, the userstats dictionary
+#Combat function, pass in the random creature, the userstats dictionary
 def combat(fightwhat,userstats):
-    #Start turn counter
+    #initialize turn counter
     turncount = 0
     #Assign creature random number of hit points
     creaturehit = random.randint(3,9)
     #Begin combat while loop, controlled by user hit points
     while userstats['HP'] >= 1:
+        #update turn counter
         turncount = turncount + 1
         print()
         print("-------Round " + str(turncount) + "-------")
