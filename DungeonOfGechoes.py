@@ -16,9 +16,11 @@ print()
 roomadj = ('freezing cold','very warm','damp and wet','almost too dark to see anything')
 creatures = ('goblin','huge rat','giant spider')
 
+#Initialize while loop control variable
+userchoice = ''
+
 #Dictionary for the user's info
 userstats = {'Name': '','HP': 10,'Gold': 0, 'Weapon': ''}
-
 
 #Get user input for name & weapon, clean it up, update dict
 tempname = input("What is your name, adventurer?  ")
@@ -28,6 +30,7 @@ print("And what weapon are you carrying today?")
 tempweap = input("I have a :  ")
 userstats['Weapon'] = str(tempweap).lower().strip()
 
+#Update control variable, give user chance to begin game while loop or not
 print()
 userchoice = input("Are you ready to begin, " + str(userstats['Name']) + "? Yes or No:  ")
 
@@ -76,10 +79,6 @@ def combat(fightwhat,userstats):
             return #end of combat, return to createroom function
     return #while loop not entered if HP < 1, return to createroom function
 
-
-
-#Declare while loop control variable
-userchoice = ''
 
 #Begin main game while loop
 while userchoice.lower() != 'no':
