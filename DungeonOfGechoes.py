@@ -73,8 +73,8 @@ def combat(fightwhat,userstats):
             #Update user dictionary loot amount
             userstats['Gold'] = userstats['Gold'] + golddrop
             print("It drops " + str(golddrop) + " gold!")
-            return #hitpts #return HP at the end of combat to createroom function
-    return #hitpts #while loop not entered if HP < 1, return to createroom function
+            return #end of combat, return to createroom function
+    return #while loop not entered if HP < 1, return to createroom function
 
 
 
@@ -89,8 +89,6 @@ while userchoice.lower() != 'no':
     def createroom(userstats):
         #Print user stats at top of the screen
         print("    " + userstats['Name'] + "   |  Weapon: " + userstats['Weapon'] + "  |  HP: " + str(userstats['HP']) + "  |  Gold: " + str(userstats['Gold']))
-        #Update user hit points in dictionary to pass in to combat function
-        #HP = userstats['HP']
         #assign random room description and random creature encounters
         room = str(roomadj[random.randint(0,3)])
         size = str(random.randint(10,30))
@@ -107,7 +105,7 @@ while userchoice.lower() != 'no':
         #Begin combat decision tree with user decision
         fightchoice = input("Do you attack? Yes or No: " )
         if fightchoice.lower() == 'yes': # If the user choses to fight...
-            #combat function call, pass in HP, random creature, and userstats dict: updated HP is returned & assigned
+            #combat function call, pass in random creature and userstats dict
             combat(fightwhat,userstats)
             if userstats['HP'] >= 1: #If the user has 1 or more hit point, they may continue
                 print()
