@@ -34,17 +34,17 @@ userchoice = input("Are you ready to begin, " + str(userstats['Name']) + "? Yes 
 
 
 #Combat function, pass in: hitpoints from dict, the random creature, the userstats dictionary
-def combat(hitpts,fightwhat,userstats):
+def combat(fightwhat,userstats):
     #Start turn counter
     turncount = 0
     #Assign creature random number of hit points
     creaturehit = random.randint(3,9)
     #Begin combat while loop, controlled by user hit points
-    while hitpts >= 1:
+    while userstats['HP'] >= 1:
         turncount = turncount + 1
         print()
         print("-------Round " + str(turncount) + "-------")
-        print("Your hit points: " + str(hitpts))
+        print("Your hit points: " + str(userstats['HP']))
         #User combat turn, programmed to auto-hit creature
         print("You attack the " + fightwhat + " with your " + userstats['Weapon'] + ".")
         time.sleep(1)
@@ -63,7 +63,7 @@ def combat(hitpts,fightwhat,userstats):
             if attacksuccess == 1: #If attack is successful, calculate random damage and update user HP
                 damage2 = random.randint(1,4)
                 print("The " + fightwhat + " hurts you for " + str(damage2) + " damage.")
-                hitpts = hitpts - damage2
+                userstats['HP'] = userstats['HP'] - damage2
             else: #If attack is unsuccessful, begin the next round of combat
                 print("The " + fightwhat + " missed you!")
         else: #If creature is not alive, end combat
@@ -73,8 +73,8 @@ def combat(hitpts,fightwhat,userstats):
             #Update user dictionary loot amount
             userstats['Gold'] = userstats['Gold'] + golddrop
             print("It drops " + str(golddrop) + " gold!")
-            return hitpts #return HP at the end of combat to createroom function
-    return hitpts #while loop not entered if HP < 1, return to createroom function
+            return #hitpts #return HP at the end of combat to createroom function
+    return #hitpts #while loop not entered if HP < 1, return to createroom function
 
 
 
@@ -90,7 +90,7 @@ while userchoice.lower() != 'no':
         #Print user stats at top of the screen
         print("    " + userstats['Name'] + "   |  Weapon: " + userstats['Weapon'] + "  |  HP: " + str(userstats['HP']) + "  |  Gold: " + str(userstats['Gold']))
         #Update user hit points in dictionary to pass in to combat function
-        HP = userstats['HP']
+        #HP = userstats['HP']
         #assign random room description and random creature encounters
         room = str(roomadj[random.randint(0,3)])
         size = str(random.randint(10,30))
@@ -108,7 +108,7 @@ while userchoice.lower() != 'no':
         fightchoice = input("Do you attack? Yes or No: " )
         if fightchoice.lower() == 'yes': # If the user choses to fight...
             #combat function call, pass in HP, random creature, and userstats dict: updated HP is returned & assigned
-            userstats['HP'] = combat(HP,fightwhat,userstats)
+            combat(fightwhat,userstats)
             if userstats['HP'] >= 1: #If the user has 1 or more hit point, they may continue
                 print()
                 #Ask user if they want to continue...if yes, while loop continues
