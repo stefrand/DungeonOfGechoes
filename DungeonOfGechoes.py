@@ -6,9 +6,9 @@ import os
 # os.system("clear")  Linux - OSX
 # os.system("cls")  Windows
 
-#Lists for rooms & creatures
+#Tuples for rooms & creatures
 roomadj = ('freezing cold','very warm','damp and wet','almost too dark to see anything')
-creatures = ('goblin','huge rat','giant spider')
+creature = ('goblin','huge rat','giant spider')
 
 #Dictionary for the user's info
 userstats = {'Name': '','HP': 10,'Gold': 0, 'Weapon': ''}
@@ -65,9 +65,9 @@ def createroom(userstats):
     #Print user stats at top of the screen
     print("    " + userstats['Name'] + "   |  Weapon: " + userstats['Weapon'] + "  |  HP: " + str(userstats['HP']) + "  |  Gold: " + str(userstats['Gold']))
     #assign random room description and random creature encounters
-    room = str(roomadj[random.randint(0,3)])
+    room = random.choice(roomadj)
     size = str(random.randint(10,30))
-    fightwhat = str(creatures[random.randint(0,2)])
+    fightwhat = random.choice(creature)
     print("----------------------------------------------------------")
     print()
     print("You walk into the room. It is " + room + "..." )
